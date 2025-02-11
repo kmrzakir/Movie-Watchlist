@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+  </head>
+  <body class="box-border flex h-screen flex-col bg-stone-800 text-white">
+    <!-- loader -->
+    <div
+      id="loader"
+      class="absolute top-1/2 left-1/2 hidden h-20 w-20 -translate-x-1/2 -translate-y-1/2 animate-spin rounded-full border-8 border-blue-400 border-t-white"
+    ></div>
+
+    <header
+      class="relative flex h-60 w-screen items-center justify-evenly bg-black bg-[url(./images/background_image.png)] bg-cover bg-center"
+    >
+      <h1 class="text-xl font-bold md:text-3xl">Find your film</h1>
+      <h4>My Watchlist</h4>
+
+      <!-- input div -->
+      <div
+        class="absolute -bottom-4 z-20 flex h-10 w-[98%] overflow-hidden rounded-md bg-white md:w-[80%]"
+      >
+        <input
+          type="text"
+          placeholder="Search for a movie"
+          id="inputField"
+          class="flex-1 border-none bg-black bg-[url('./images/search_icon.svg')] bg-[length:20px_20px] bg-[position:10px_center] bg-no-repeat pl-[40px] outline-none"
+        />
+        <button
+          id="serachButton"
+          class="h-full w-[100px] shrink-0 cursor-pointer border-none bg-green-300"
+        >
+          Search
+        </button>
+      </div>
+    </header>
+    <main class="flex flex-1 flex-col items-center overflow-auto">
+      <!-- replace hidden by flex when we find movies -->
+      <ul
+        id="all_movies_list_ul"
+        class="mt-10 hidden h-auto w-[100%] flex-wrap justify-center gap-5 lg:w-[80%]"
+      ></ul>
+      <!-- default content -->
+      <!-- replace hidden with flex -->
+      <div
+        id="start_exploring_div"
+        class="flex h-full w-screen flex-col items-center justify-center gap-y-1"
+      >
+        <img src="./images/movies_here_icon.svg" alt="" class="h-20 w-20" />
+        <h1>Start exploring</h1>
+      </div>
+      <!-- when movie is not found -->
+      <div
+        id="movie_not_found_div"
+        class="hidden h-full w-screen flex-col items-center justify-center gap-y-12 p-10"
+      >
+        <h1 class="text-center">
+          Unable to find what you’re looking for. Please try another search.
+        </h1>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
