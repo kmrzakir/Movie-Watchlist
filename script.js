@@ -20,7 +20,7 @@ async function fetchMoviesData(inputQuery) {
   const API_KEY = "b64cb23d";
   try {
     const response = await fetch(
-      `http://www.omdbapi.com/?apikey=${API_KEY}&s=${inputQuery}`,
+      `https://www.omdbapi.com/?apikey=${API_KEY}&s=${inputQuery}`,
     );
     const data = await response.json();
     // console.log("ALL MOVIES FETCHED:", JSON.stringify(data, null, 2));
@@ -31,12 +31,12 @@ async function fetchMoviesData(inputQuery) {
       allMoviesListUl.innerHTML = "";
       // Now fetch all data of a movie on the bases of imdbID
       data.Search.forEach(async ({ imdbID }) => {
-        console.log(`IMDB are : ${imdbID}`);
         const responce = await fetch(
-          `http://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}`,
+          `https://www.omdbapi.com/?apikey=${API_KEY}&i=${imdbID}`,
         );
 
         const movie = await responce.json();
+        console.log(`DATA IS =========== ${JSON.stringify(movie, null, 2)}`);
 
         let movieObject = {
           title: movie.Title,
@@ -46,8 +46,19 @@ async function fetchMoviesData(inputQuery) {
           genre: movie.Genre, // means movie type
           plot: movie.Plot, // description
           imdbid: imdbID, // this will help top add in watchlist
-          rating: parseFloat(movie.Ratings[0].Value),
+          // rating: parseFloat(movie.Ratings[0].Value),
         };
+
+        // CHECKING IS RATING PROPERTY PRESENT IN MOVIE DATA OR NOT
+        if (
+          !movie.Ratings ||
+          movie.Ratings.length === 0 ||
+          movie.Ratings[0].Value === "N/A"
+        ) {
+          movieObject.rating = "N/A";
+        } else {
+          movieObject.rating = parseFloat(movie.Ratings[0].Value);
+        }
 
         displayMovie(movieObject);
         loader.classList.replace("flex", "hidden");
