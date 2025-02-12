@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="./output.css" rel="stylesheet" />
+    <link href="output.css" rel="stylesheet" />
   </head>
+  <!-- added h-[100dvh] -->
   <body
-    class="m-0 box-border flex h-screen flex-col overflow-x-hidden bg-stone-800 p-0 text-white"
+    class="peer-autofill: m-auto box-border flex h-[100dvh] flex-col overflow-x-hidden bg-stone-800 text-white"
   >
     <!-- loader -->
     <div
@@ -38,7 +39,8 @@
         </button>
       </div>
     </header>
-    <main class="flex flex-1 flex-col items-center overflow-auto">
+    <!-- add flex-grow -->
+    <main class="flex flex-1 flex-grow flex-col items-center overflow-auto">
       <!-- replace hidden by flex when we find movies -->
       <ul
         id="all_movies_list_ul"
